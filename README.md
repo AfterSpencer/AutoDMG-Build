@@ -10,8 +10,6 @@ The script is intended to be used with templates and existing images. The image 
 
 AutoDMG templates are plist files which can be nested. Creation of templates is documented in the AutoDMG wiki [here](https://github.com/MagerValp/AutoDMG/wiki/Templates).
 
-Though it may not be strictly required, there is a portion of the script that repairs permissions on the disk. If this is not desired comment out or remove the section starting at line 23 and ending at line 47. 
+Though it may not be strictly required, there is a portion of the script that repairs permissions on the disk. If this is not desired comment out or remove the section starting at line 27 and ending at line 50. 
 
----
 
-Future versions will better standardize locations for variables such as template and log locations to be changed by people who are not me.
