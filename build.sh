@@ -9,12 +9,13 @@ srflag=0
 erflag=0
 loglocation="/var/log"
 imagelocation="/Users/user/Desktop/Images"
+templatelocation="/Users/user/Desktop/ImageBuilding/AutoDMG\ Templates/Mavericks_"
 
 function imagebuild {
 
 echo `date` "- Mavericks_"$image".hfs.dmg build started" >> "$loglocation"/images.log
 
-time /Applications/AutoDMG.app/Contents/MacOS/AutoDMG -r -L 7 -l "$loglocation"/build.log build /Users/user/Desktop/ImageBuilding/AutoDMG\ Templates/Mavericks_"$image".plist 
+time /Applications/AutoDMG.app/Contents/MacOS/AutoDMG -r -L 7 -l "$loglocation"/build.log build "$templatelocation""$image".plist 
 
 if (($? == 0 )); then
 
@@ -83,7 +84,7 @@ if [ $srflag == 0 ]
 then
 image=Sec_Refresh
 imagebuild
-mv /Users/user/Desktop/Images/Mavericks_"$image".hfs.dmg /Users/user/Desktop/Images/Mavericks_Sec.hfs.dmg
+mv "$imagelocation"/Mavericks_"$image".hfs.dmg "$imagelocation"/Mavericks_Sec.hfs.dmg
 srflag=1
 fi
 }
@@ -102,7 +103,7 @@ if [ $erflag == 0 ]
 then
 image=Elem_Refresh
 imagebuild
-mv /Users/user/Desktop/Images/Mavericks_"$image".hfs.dmg /Users/user/Desktop/Images/Mavericks_Elem.hfs.dmg
+mv "$imagelocation"/Mavericks_"$image".hfs.dmg "$imagelocatoin"/Mavericks_Elem.hfs.dmg
 erflag=1
 fi
 }
