@@ -7,21 +7,23 @@ sflag=0
 eflag=0
 srflag=0
 erflag=0
+loglocation="/var/log"
+imagelocation="/Users/user/Desktop/Images"
 
 function imagebuild {
 
-echo `date` "- Mavericks_"$image".hfs.dmg build started" >> /Users/user/Desktop/ImageBuilding/Logfile/images.log
+echo `date` "- Mavericks_"$image".hfs.dmg build started" >> "$loglocation"/images.log
 
-time /Applications/AutoDMG.app/Contents/MacOS/AutoDMG -r -L 7 -l /Users/user/Desktop/ImageBuilding/Logfile/build.log build /Users/user/Desktop/ImageBuilding/AutoDMG\ Templates/Mavericks_"$image".plist 
+time /Applications/AutoDMG.app/Contents/MacOS/AutoDMG -r -L 7 -l "$loglocation"/build.log build /Users/user/Desktop/ImageBuilding/AutoDMG\ Templates/Mavericks_"$image".plist 
 
 if (($? == 0 )); then
 
-echo `date` "- Mavericks_"$image".hfs.dmg build finished" >> /Users/user/Desktop/ImageBuilding/Logfile/images.log
+echo `date` "- Mavericks_"$image".hfs.dmg build finished" >> "$loglocation"/images.log
 
-echo `date` "- Mavericks_"$image".hfs.dmg permissions repair started" >> /Users/user/Desktop/ImageBuilding/Logfile/images.log
+echo `date` "- Mavericks_"$image".hfs.dmg permissions repair started" >> "$loglocation"/images.log
 
 # Mount as writable
-hdiutil attach -owners on /Users/user/Desktop/Images/Mavericks_Working.hfs.dmg -shadow
+hdiutil attach -owners on "$imagelocation"/Mavericks_Working.hfs.dmg -shadow
 
 # Repair Permissions
 diskutil repairpermissions /Volumes/Macintosh\ HD\ 1/
@@ -34,23 +36,23 @@ hdiutil eject /Volumes/Macintosh\ HD\ 1
 done
 
 # Combine images into one
-hdiutil convert -format UDZO -o /Users/user/Desktop/Images/new.dmg /Users/user/Desktop/Images/Mavericks_Working.hfs.dmg -shadow
+hdiutil convert -format UDZO -o "$imagelocation"/new.dmg "$imagelocation"/Mavericks_Working.hfs.dmg -shadow
 
 # Scan for restore
-asr imagescan -source /Users/user/Desktop/Images/new.dmg
+asr imagescan -source "$imagelocation"/new.dmg
 
 # Rename image file
-mv /Users/user/Desktop/Images/new.dmg /Users/user/Desktop/Images/Mavericks_"$image".hfs.dmg
+mv "$imagelocation"/new.dmg "$imagelocation"/Mavericks_"$image".hfs.dmg
 
 # Remove shadow file and old image
-rm /Users/user/Desktop/Images/Mavericks_Working.hfs.dmg
-rm /Users/user/Desktop/Images/Mavericks_Working.hfs.dmg.shadow
+rm "$imagelocation"/Mavericks_Working.hfs.dmg
+rm "$imagelocation"/Mavericks_Working.hfs.dmg.shadow
 
-echo `date` "- Mavericks_"$image".hfs.dmg permissions repair finished" >> /Users/user/Desktop/ImageBuilding/Logfile/images.log
+echo `date` "- Mavericks_"$image".hfs.dmg permissions repair finished" >> "$loglocation"images.log
 
 else
 
-echo `date` "- Mavericks_"$image".hfs.dmg build failed" >> /Users/user/Desktop/ImageBuilding/Logfile/images.log
+echo `date` "- Mavericks_"$image".hfs.dmg build failed" >> "$loglocation"images.log
 
 exit 1
 
