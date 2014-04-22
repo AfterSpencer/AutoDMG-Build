@@ -48,11 +48,11 @@ mv "$imagelocation"/new.dmg "$imagelocation"/Mavericks_"$image".hfs.dmg
 rm "$imagelocation"/Mavericks_Working.hfs.dmg
 rm "$imagelocation"/Mavericks_Working.hfs.dmg.shadow
 
-echo `date` "- Mavericks_"$image".hfs.dmg permissions repair finished" >> "$loglocation"images.log
+echo `date` "- Mavericks_"$image".hfs.dmg permissions repair finished" >> "$loglocation"/images.log
 
 else
 
-echo `date` "- Mavericks_"$image".hfs.dmg build failed" >> "$loglocation"images.log
+echo `date` "- Mavericks_"$image".hfs.dmg build failed" >> "$loglocation"/images.log
 
 exit 1
 
