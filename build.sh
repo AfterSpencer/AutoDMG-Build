@@ -1,5 +1,7 @@
 #!/bin/sh
 
+rsync -vru /Users/user/Library/Application\ Support/AutoDMG/ /var/root/Library/Application\ Support/AutoDMG/
+
 NO_ARGS=0 
 E_OPTERROR=85
 vflag=0
